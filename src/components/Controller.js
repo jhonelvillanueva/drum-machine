@@ -1,9 +1,12 @@
 import './Controller.css';
 import React from 'react';
 
-const Controller = ({ onBank, isPowerOn, volume, adjustVolume }) => {
+const Controller = ({ onBank, isPowerOn, volume, adjustVolume, display }) => {
 	return (
 		<>
+			<div className='display controls'>
+				<h1>{display}</h1>
+			</div>
 			<div className='power-control-container controls'>
 				<button className='power-control' onClick={isPowerOn}>
 					Power
