@@ -13,9 +13,9 @@ const Controller = ({ onBank, isPowerOn, volume, adjustVolume, display }) => {
 				</button>
 			</div>
 			<div className='bank-control-container controls'>
-				<div className='bank-control' onClick={onBank}>
+				<button className='bank-control' onClick={onBank}>
 					Bank
-				</div>
+				</button>
 			</div>
 			<div className='volume-control-container controls'>
 				<input

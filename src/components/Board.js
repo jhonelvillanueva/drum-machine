@@ -12,10 +12,12 @@ const Board = () => {
 
 	const chooseBank = () => {
 		setBank(bank === bankOne ? bankTwo : bankOne);
+		console.log(bank);
 	};
 
 	const isPowerOn = () => {
 		setPower(power ? false : true);
+		console.log(power);
 	};
 
 	const adjustVolume = (e) => {
@@ -34,7 +36,7 @@ const Board = () => {
 
 	//* Need to clear display
 	useEffect(() => {
-		const clearDisplay = setTimeout(() => setDisplay(' '), 500);
+		const clearDisplay = setTimeout(() => setDisplay(' '), 1000);
 		return () => clearTimeout(clearDisplay);
 	}, [display]);
 
@@ -50,12 +52,17 @@ const Board = () => {
 				/>
 			</div>
 			<div className='drumpad-container'>
-				<DrumButton
-					bank={bank}
-					power={power}
-					volume={volume}
-					displayOn={displayOn}
-				/>
+				{bank.map((item) => {
+					return (
+						<DrumButton
+							key={item.id}
+							drum={item}
+							displayOn={displayOn}
+							volume={volume}
+							power={power}
+						/>
+					);
+				})}
 			</div>
 		</div>
 	);

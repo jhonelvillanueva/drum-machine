@@ -1,43 +1,39 @@
 import './DrumButton.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const DrumButton = ({ bank, power, volume, displayOn }) => {
-	const drum = bank.map((item) => {
-		let audio = new Audio(item.url);
-		const playSound = () => {
-			audio.play();
-			audio.volume = volume;
-			displayOn(item.id.replace(/-/g, ' '));
-		};
+const DrumButton = ({ drum, displayOn, volume }) => {
+	const audio = new Audio(drum.url);
 
-		const handleKeypress = (e) => {
-			if (e.keyCqode === item.keyCode) {
-				audio.play();
-			}
-		};
+	const playSound = () => {
+		audio.play();
+		audio.volume = volume;
+		displayOn(drum.id);
+		console.log(drum);
+	};
 
-		if (power) {
-			return (
-				<button
-					className='btn-drum'
-					key={item.id}
-					onClick={playSound}
-					onKeyDown={handleKeypress}>
-					<p>{item.keyTrigger}</p>
-					<p>{item.id.replace(/-/g, ' ')}</p>
-				</button>
-			);
-		} else {
-			return (
-				<button className='btn-drum' key={item.id}>
-					<p>{item.keyTrigger}</p>
-					<p>{item.id.replace(/-/g, ' ')}</p>
-				</button>
-			);
+	const handleKeyDown = (e) => {
+		if (e.keyCode === drum.keyCode) {
+			playSound();
 		}
-	});
+	};
 
-	return <div className='btn-drum-container'>{drum}</div>;
+	useEffect(() => {
+		document.addEventListener('keydown', handleKeyDown, true);
+
+		return () => document.removeEventListener('keydown', handleKeyDown, true);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	return (
+		<div className='btn-drum-container'>
+			<button
+				className='btb-drum'
+				onClick={playSound}
+				onKeyDown={handleKeyDown}>
+				{drum.keyTrigger}
+			</button>
+		</div>
+	);
 };
 
 export default DrumButton;
