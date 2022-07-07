@@ -1,14 +1,15 @@
 import './DrumButton.css';
 import React, { useEffect } from 'react';
 
-const DrumButton = ({ drum, displayOn, volume }) => {
+const DrumButton = ({ drum, displayOn, volume, power }) => {
 	const audio = new Audio(drum.url);
 
 	const playSound = () => {
 		audio.play();
 		audio.volume = volume;
 		displayOn(drum.id);
-		console.log(drum);
+
+		console.log(power);
 	};
 
 	const handleKeyDown = (e) => {

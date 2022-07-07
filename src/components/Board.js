@@ -12,7 +12,6 @@ const Board = () => {
 
 	const chooseBank = () => {
 		setBank(bank === bankOne ? bankTwo : bankOne);
-		console.log(bank);
 	};
 
 	const isPowerOn = () => {
